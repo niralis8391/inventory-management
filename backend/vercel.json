@@ -6,9 +6,10 @@
     }
   },
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/app.js"
-    }
+    { "src": "/product/(.*)", "dest": "/api/app.js/product/$1" },
+    { "src": "/user/(.*)", "dest": "/api/app.js/user/$1" },
+    { "src": "/customer/(.*)", "dest": "/api/app.js/customer/$1" },
+    { "src": "/order/(.*)", "dest": "/api/app.js/order/$1" },
+    { "src": "/(.*)", "dest": "/api/app.js" }
   ]
 }
