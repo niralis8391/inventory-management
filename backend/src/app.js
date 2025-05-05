@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const serverless = require('serverless-http');
 
 const userRoutes = require('../routes/user');
 const productRoutes = require('../routes/product');
@@ -47,9 +46,9 @@ mongoose.connect(process.env.MONGO_URI)
         console.error(error.message);
     });
 
-// app.listen(PORT, '0.0.0.0', () => {
-//     console.log('Server running');
-// });
+app.listen(PORT, '0.0.0.0', () => {
+    console.log('Server running');
+});
 
 
-module.exports.handler = serverless(app);  // Wrap the app for serverless deployment
+// module.exports.handler = serverless(app);  // Wrap the app for serverless deployment
