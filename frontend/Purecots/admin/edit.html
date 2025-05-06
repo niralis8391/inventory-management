@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit/Delete Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: black
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .edit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .delete-btn:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    
+
+<div class="container">
+    <h2>Edit/Delete Product</h2>
+    <form id="productForm">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" value="Sample Product" required>
+
+       
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value="This is a sample product." required>
+         
+        <label for="price">Price ($):</label>
+        <input type="number" id="price" name="price" value="19.99" required>
+
+        <label for="price">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="19.99" required>
+
+        <label for="image">image</label>
+        <input type="file">
+
+        <div class="actions">
+            <button type="submit" class="edit-btn">Update Product</button>
+            <button type="button" class="delete-btn" onclick="deleteProduct()">Delete Product</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Example JS function to handle delete
+    function deleteProduct() {
+        if (confirm("Are you sure you want to delete this product?")) {
+            alert("Product deleted (mock action).");
+            // You could redirect or send a DELETE request to the backend here
+        }
+    }
+
+    document.getElementById("productForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Product updated (mock action).");
+        // You would send an update (PUT/POST) request to backend here
+    });
+</script>
+
+</body>
+</html>
