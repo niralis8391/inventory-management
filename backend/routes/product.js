@@ -8,7 +8,10 @@ const router = express.Router();
 
 
 router.post('/createProduct', isAuth, productValidator.productValidator, productController.addProduct)
+router.get('/getAll', isAuth, productController.getAll)
+
 router.get('/getProductByCategory/:category', productController.getProductByCategory)
+router.get('/getProductById/:productId', productController.getProductById)
 
 
 module.exports = router;

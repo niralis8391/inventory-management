@@ -38,3 +38,35 @@ exports.getProductByCategory = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+
+exports.getAll = async (req, res) => {
+    try {
+        if (!req.isAuth) {
+            return res.status(403).json({ success: false, message: "Not Authenticated" })
+        }
+        const products = await Product.find()
+        if (!products) {
+            return res.status(404).json({ success: false, message: "product not found" });
+        }
+        res.status(200).json({ success: true, message: "products found", data: products })
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message })
+    }
+}
+
+exports.getProductById = async (req, res) => {
+    try {
+        if (!req.isAuth) {
+            return res.status(403).json({ success: false, message: "Not Authenticated" })
+        }
+        const productId = req.params.productId
+
+        const product = await Product.findById(productId)
+        if (!product) {
+            return res.status({ success: false, message: "product not found" })
+        }
+        res.status(200).json({ success: true, message: "product founded", data: product })
+    } catch (error) {
+        res.status(500).json({ success: true, error: error })
+    }
+}
