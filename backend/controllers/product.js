@@ -70,3 +70,50 @@ exports.getProductById = async (req, res) => {
         res.status(500).json({ success: true, error: error })
     }
 }
+
+
+exports.productcount = async (req, res) => {
+    try {
+        if (!req.isAuth) {
+            return res.status(403).json({ success: false, message: "Not Authenticated" })
+        }
+        const productCount = await Product.countDocuments();
+        if (!productCount) {
+            return res.status(404).json({ success: false, message: "Product count not found" });
+        }
+        res.status(200).json({ success: true, message: "product count found", data: productCount })
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message })
+    }
+}
+
+exports.updateProduct = async (req, res) => {
+    const updatedData = req.body;
+    const productId = req.params.productId
+    try {
+        const product = await Product.findByIdAndUpdate(
+            productId,
+            updatedData,
+            { new: true }
+        )
+        if (!product) {
+            return res.status(400).json({ success: false, message: "product not updated" })
+        }
+        res.status(200).json({ success: false, message: "product updated", data: product })
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message })
+    }
+}
+
+exports.deleteProduct = async (req, res) => {
+    const productId = req.params.productId
+    try {
+        const product = await Product.findByIdAndDelete(productId)
+        if (!product) {
+            res.status(400).json({ success: false, message: "product not deleted" });
+        }
+        res.status(200).json({ success: true, message: "deleted successfull" })
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message })
+    }
+}

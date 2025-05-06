@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux'
 
 export const Navbar = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
 
 
     function changeHandler(e) {
@@ -39,7 +40,7 @@ export const Navbar = () => {
                     name="category"
                     value=""
                     onChange={changeHandler}
-                    className="bg-black text-white rounded-md p-2 w-fit"
+                    className="bg-white text-black rounded-md p-2 w-fit"
                 >
                     <option value="" disabled>Select...</option>
                     <option value="fashion" className="text-black">Fashion</option>

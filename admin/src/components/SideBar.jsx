@@ -1,7 +1,20 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Navigate, NavLink } from 'react-router-dom'
 
 export const SideBar = () => {
+
+    // const [token, setToken] = useState(null)
+
+    // useEffect(() => {
+    //     setToken(localStorage.getItem("token"))
+    // }, [])
+
+    // if (!token) {
+    //     return <Navigate to="/login" />
+    // }
+
+
+
     return (
         <div className='border-r-2 border-gray-300 h-screen p-5'>
             <ul className='flex flex-col gap-3'>

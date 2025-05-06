@@ -15,14 +15,11 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/', element: <RootLayout />, children: [
-        {
-          path: "/", element: <Dashboard />, children: [
-            { path: "/products", element: <ProductList /> },
-            { path: "/addProduct", element: <ProductForm /> },
-            { path: "//products/edit/:productId", element: <EditProduct /> },
-            { path: "/orders", element: <Orders /> }
-          ]
-        },
+        { path: "/", element: <Dashboard />, },
+        { path: "/products", element: <ProductList /> },
+        { path: "/addProduct", element: <ProductForm /> },
+        { path: "/products/edit/:productId", element: <EditProduct /> },
+        { path: "/orders", element: <Orders /> },
         { path: '/login', element: <Login /> },
         { path: '/signup', element: <Signup /> },
       ]

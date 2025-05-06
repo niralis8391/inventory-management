@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import API from '../API/API';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
 
@@ -9,6 +10,8 @@ export const Login = () => {
         email: "",
         password: ""
     });
+
+    const navigate = useNavigate()
 
     function changeHandler(event) {
         const { name, value } = event.target;
@@ -28,6 +31,7 @@ export const Login = () => {
             })
             console.log(response)
             if (response.status === 200) {
+                navigate('/')
                 localStorage.setItem("token", response.data.token)
                 localStorage.setItem("userId", response.data.userId)
             }
@@ -48,7 +52,7 @@ export const Login = () => {
                     <input type='password' name='password' onChange={changeHandler} className='p-2 rounded-md border border-gray-300 block w-full' />
                 </label>
                 <button className='text-left py-2 text-gray-500 capitalize'>forgot password?</button>
-                <button className='w-fit bg-orange-600 px-5 py-2 rounded-md text-white mt-5'>Log in</button>
+                <button className='w-fit bg-orange-600 px-5 py-2 rounded-md text-white mt-5 cursor-pointer'>Log in</button>
             </form>
         </div>
     )

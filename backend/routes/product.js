@@ -9,9 +9,12 @@ const router = express.Router();
 
 router.post('/createProduct', isAuth, productValidator.productValidator, productController.addProduct)
 router.get('/getAll', isAuth, productController.getAll)
+router.get('/productCounts', isAuth, productController.productcount)
 
 router.get('/getProductByCategory/:category', productController.getProductByCategory)
-router.get('/getProductById/:productId', productController.getProductById)
+router.get('/getProductById/:productId', isAuth, productController.getProductById)
+router.put('/updateProduct/:productId', isAuth, productController.updateProduct)
+router.delete('/deleteProduct/:productId', isAuth, productController.deleteProduct)
 
 
 module.exports = router;

@@ -31,13 +31,14 @@ export const Products = () => {
     fetchByCategory()
   }, [selectedCategory])
 
-  if (!products) {
-    return <p className='m-5 capitalize'>no products found.</p>
-  }
-
   if (loading) {
     return <p className=' capitalize w-full h-screen z-60 text-white text-2xl bg-orange-600/50 absolute left-0 top-0 flex items-center justify-center'>Loading...</p>
   }
+
+  if (products.length === 0) {
+    return <p className='m-5 text-2xl text-center capitalize'>no products found.</p>
+  }
+
 
   return (
     <div className='py-10 mx-10'>

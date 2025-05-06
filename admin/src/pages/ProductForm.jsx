@@ -90,6 +90,31 @@ export const ProductForm = () => {
                     />
                 </label>
 
+
+
+                <label className='flex flex-col text-lg text-gray-700 mt-5'>
+                    Product Image
+                    <input
+                        className='p-2 rounded-md border-3 border-gray-200'
+                        type='file'
+                        name='productImage'
+                        onChange={fileChangeHandler}
+                        required
+                    />
+                </label>
+
+                {previewUrl &&
+                    <>
+                        <p className='text-lg text-gray-700 mt-5'>Preview: </p>
+                        <img
+                            src={previewUrl}
+                            className='w-fit h-36 mt-2'
+                            alt='product image'
+                        />
+                    </>
+                }
+
+
                 <label className='flex flex-col text-lg text-gray-700 mt-5'>
                     Product Category
                     <select
@@ -160,29 +185,6 @@ export const ProductForm = () => {
                         min='0'
                     />
                 </label>
-
-
-                <label className='flex flex-col text-lg text-gray-700 mt-5'>
-                    Product Image
-                    <input
-                        className='p-2 rounded-md border-3 border-gray-200'
-                        type='file'
-                        name='productImage'
-                        onChange={fileChangeHandler}
-                        required
-                    />
-                </label>
-
-                {previewUrl &&
-                    <>
-                        <p className='text-lg text-gray-700 mt-5'>Preview: </p>
-                        <img
-                            src={previewUrl}
-                            className='w-fit h-36 mt-2'
-                            alt='product image'
-                        />
-                    </>
-                }
 
 
                 <div className='flex flex-col gap-2 items-start mt-5'>

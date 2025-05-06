@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import API from '../API/API'
 
 export const ProductList = () => {
@@ -9,6 +10,8 @@ export const ProductList = () => {
     const [loading, setLoading] = useState(false)
 
     const token = localStorage.getItem("token");
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function fetchProducts() {
@@ -29,6 +32,18 @@ export const ProductList = () => {
         }
         fetchProducts()
     }, []);
+
+    async function deleteHandler(productId) {
+        setLoading(true)
+        try {
+            const response = await API.delete(`/product/deleteProduct/${productId}`)
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     if (loading) {
         return <p>Loading...</p>
@@ -54,8 +69,8 @@ export const ProductList = () => {
                         <p className="text-orange-600 font-semibold">₹{product.price}</p>
                     </div>
                     <div className='flex gap-2 items-center mt-3'>
-                        <button className='bg-blue-600 text-white rounded-md px-5 py-2 text-xl' onClick={() => navigate(`/products/edit/${product._id}`)}>Edit</button>
-                        <button className='bg-red-600 text-white rounded-md px-5 py-2 text-xl' onClick={() => deleteHandler(product._id)}>Delete</button>
+                        <button className='bg-blue-600 text-white cursor-pointer rounded-md px-5 py-1 text-xl' onClick={() => navigate(`/products/edit/${product._id}`)}>Edit</button>
+                        <button className='bg-red-600 text-white cursor-pointer rounded-md px-5 py-1 text-xl' onClick={() => deleteHandler(product._id)}>Delete</button>
                     </div>
                 </div>
             ))}
