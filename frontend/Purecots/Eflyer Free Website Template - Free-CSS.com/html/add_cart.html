@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add to Cart</title>
-    <head>
+    <title>Shopping Cart</title>
+
       <!-- basic -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,57 +38,22 @@
       <link rel="stylesheet" href="css/owl.carousel.min.css">
       <link rel="stylesoeet" href="css/owl.theme.default.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-      
-   </head>
-   <style>
+  
+    <style>
         .product-container {
             display: flex;
-            max-width: 600px;
-            margin: 50px auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
+            gap: 20px;
         }
-
-        .product-image {
-            flex: 1;
-            margin-right: 20px;
-        }
-
         .product-image img {
-            max-width: 100%;
+            width: 150px;
             height: auto;
-            border-radius: 8px;
         }
-
         .product-details {
-            flex: 2;
-        }
-
-        .product-details h2 {
-            margin-top: 0;
-        }
-
-        .quantity {
-            margin: 15px 0;
-        }
-
-        .add-to-cart-btn {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .add-to-cart-btn:hover {
-            background-color: #218838;
+            flex-grow: 1;
         }
     </style>
 </head>
 <body>
-  
    <div class="banner_bg_main">
       <!-- header top section start -->
       <div class="container">
@@ -115,167 +80,89 @@
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <div class="logo"><a href="index.html"><img src="images/logo.png"></a></div>
+                  <div class="logo"><a href="index.html"><img src="images/logo.png.jpg" style="max-width: 21%;height: auto;"></a></div>
                </div>
             </div>
          </div>
-     
+      </div>
       <!-- logo section end -->
       <!-- header section start -->
-     
+    
       <!-- header section end -->
       <!-- banner section start -->
-    
-      <!-- banner section end -->
-   </div>
-<!-- <div class="product-container">
-    <div class="product-image">
-        <img src="path_to_product_image.jpg" alt="Product Name">
-    </div>
-    <div class="product-details">
-        <h2>Product Name</h2>
-        <p>Description of the product goes here. It can be a few lines explaining the features or benefits.</p>
-        <p><strong>Price:</strong> $29.99</p>
-        <div class="quantity">
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" value="1" min="1">
-        </div>
-        <button class="add-to-cart-btn">Add to Cart</button>
-    </div>
-</div> -->
-<div id="cart-items">
- 
-
+      
      
-      
    
-   
-</div>
+    <div id="cart-items"></div>
+   </div>
+    <script>
+        // Your script here
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const container = document.getElementById('cart-items');
 
-</div>
-      <!-- footer section start -->
-      <div class="footer_section layout_padding">
-         <div class="container">
-            <div class="footer_logo"><a href="index.html"><img src="images/footer-logo.png"></a></div>
-            <div class="input_bt">
-               <input type="text" class="mail_bt" placeholder="Your Email" name="Your Email">
-               <span class="subscribe_bt" id="basic-addon2"><a href="#">Subscribe</a></span>
-            </div>
-            <div class="footer_menu">
-               <ul>
-                  <li><a href="#">Best Sellers</a></li>
-                  <li><a href="#">Gift Ideas</a></li>
-                  <li><a href="#">New Releases</a></li>
-                  <li><a href="#">Today's Deals</a></li>
-                  <li><a href="#">Customer Service</a></li>
-               </ul>
-            </div>
-            <div class="location_main">Help Line  Number : <a href="#">+1 1800 1200 1200</a></div>
-         </div>
-      </div>
-      
-      <!-- footer section end -->
-      <!-- copyright section start -->
-      <div class="copyright_section">
-         <div class="container">
-            <p class="copyright_text">© 2020 All Rights Reserved. Design by <a href="https://html.design">Free html  Templates</a></p>
-         </div>
-      </div>
-      <!-- copyright section end -->
-      <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
-      <script>
-         function openNav() {
-           document.getElementById("mySidenav").style.width = "250px";
-         }
-       
-         function closeNav() {
-           document.getElementById("mySidenav").style.width = "0";
-         }
-       
-         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-         const container = document.getElementById('cart-items');
-       
-         if (cart.length === 0) {
-           container.innerHTML = "<p>Cart is empty</p>";
-         } else {
-           let grandTotal = 0;
-       
-           cart.forEach(product => {
-             grandTotal += product.total;
-       
-             const div = document.createElement('div');
-             div.style.display = "flex";
-             div.style.border = "2px solid gray";
-             div.style.borderRadius = "10px";
-             div.style.margin = "20px auto";
-             div.style.padding = "15px";
-             div.style.maxWidth = "700px";
-             div.style.alignItems = "center";
-             div.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
-             div.style.backgroundColor = "#f9f9f9";
-       
-             div.innerHTML = `
-            
-               <div class="product-container">
-          <div class="product-image">
-              <img src="${product.image}" alt="${product.productName}">
-          </div>
-          <div class="product-details">
-              <h2>Product Name</h2>
-              <p>${product.description || 'N/A'}</p>
-              <p><strong>Price:</strong> ${product.price}</p>
-             <p><strong>Quantity:</strong> ${product.productQuantity}</p>
+        if (cart.length === 0) {
+            container.innerHTML = "<p>Cart is empty</p>";
+        } else {
+            let grandTotal = 0;
 
-              <div class="quantity">
+            cart.forEach(product => {
+                grandTotal += product.total;
 
-                  <p style="margin: 5px 0;"><strong>Total:</strong> $${product.total.toFixed(2)}</p>
-              </div>
-             
-          </div>
-      </div>
-             `;
-       
-             container.appendChild(div);
-           });
-       
-           // Add grand total at the bottom
-           const totalDiv = document.createElement('div');
-           totalDiv.style.textAlign = "center";
-           totalDiv.style.marginTop = "30px";
-           totalDiv.innerHTML = `<h2>Grand Total: $${grandTotal.toFixed(2)}</h2>`;
-           
-           container.appendChild(totalDiv);
-         }
-         const checkoutBtn = document.createElement('button');
-    checkoutBtn.textContent = "Checkout";
-    checkoutBtn.style.marginTop = "20px";
-    checkoutBtn.style.padding = "10px 20px";
-    checkoutBtn.style.fontSize = "18px";
-    checkoutBtn.style.backgroundColor = "#28a745";
-    checkoutBtn.style.color = "white";
-    checkoutBtn.style.border = "none";
-    checkoutBtn.style.borderRadius = "5px";
-    checkoutBtn.style.cursor = "pointer";
-        checkoutBtn.style.position= "relative";
-        checkoutBtn.style.left= "44%";
+                const div = document.createElement('div');
+                div.style.display = "flex";
+                div.style.border = "2px solid gray";
+                div.style.borderRadius = "10px";
+                div.style.margin = "20px auto";
+                div.style.padding = "15px";
+                div.style.maxWidth = "700px";
+                div.style.alignItems = "center";
+                div.style.boxShadow = "0 2px 10px rgba(0,0,0,0.1)";
+                div.style.backgroundColor = "#f9f9f9";
 
-    checkoutBtn.onclick = function () 
-    {
-      window.location.href = 'register.html';
-    };
+                div.innerHTML = `
+                <div class="product-container">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.productName}">
+                    </div>
+                    <div class="product-details">
+                        <h2>${product.productName}</h2>
+                        <p>${product.description || 'N/A'}</p>
+                        <p><strong>Price:</strong> ${product.price}</p>
+                        <p><strong>Quantity:</strong> ${product.productQuantity}</p>
+                        <div class="quantity">
+                            <p style="margin: 5px 0;"><strong>Total:</strong> $${product.total.toFixed(2)}</p>
+                        </div>
+                    </div>
+                </div>
+                `;
+                container.appendChild(div);
+            });
 
-    container.appendChild(checkoutBtn);
-  
-       </script>
-       
+            const totalDiv = document.createElement('div');
+            totalDiv.style.textAlign = "center";
+            totalDiv.style.marginTop = "30px";
+            totalDiv.innerHTML = `<h2>Grand Total: $${grandTotal.toFixed(2)}</h2>`;
+            container.appendChild(totalDiv);
+        }
 
+        const checkoutBtn = document.createElement('button');
+        checkoutBtn.textContent = "Checkout";
+        checkoutBtn.style.marginTop = "20px";
+        checkoutBtn.style.padding = "10px 20px";
+        checkoutBtn.style.fontSize = "18px";
+        checkoutBtn.style.backgroundColor = "#28a745";
+        checkoutBtn.style.color = "white";
+        checkoutBtn.style.border = "none";
+        checkoutBtn.style.borderRadius = "5px";
+        checkoutBtn.style.cursor = "pointer";
+        checkoutBtn.style.position = "relative";
+        checkoutBtn.style.left = "44%";
+
+        checkoutBtn.onclick = function () {
+            window.location.href = 'register.html';
+        };
+
+        container.appendChild(checkoutBtn);
+    </script>
 </body>
 </html>

@@ -1,123 +1,326 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<!-- <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Edit/Delete Product</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 30px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            color: black
-        }
-
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .actions {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .edit-btn {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .delete-btn {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .edit-btn:hover {
-            background-color: #45a049;
-        }
-
-        .delete-btn:hover {
-            background-color: #e53935;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Edit Product</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header {
+      background: #343a40;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+    nav a:hover { text-decoration: underline; }
+    .container { padding: 20px; max-width: 600px; margin: auto; }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-    
+  <header>
+    <h1 id="formTitle">Edit Product</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="add_product.html">Add Product</a>
+      <a href="edit_delete_product.html">Manage Products</a>
+    </nav>
+  </header>
 
-<div class="container">
-    <h2>Edit/Delete Product</h2>
-    <form id="productForm">
-        <label for="productName">Product Name:</label>
-        <input type="text" id="productName" name="productName" value="Sample Product" required>
+  <div class="container">
+    <form id="productForm" action="#" method="post" enctype="multipart/form-data">
+      <label>Product Name:</label>
+      <input type="text" id="productName" name="productName" required>
 
-       
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" value="This is a sample product." required>
-         
-        <label for="price">Price ($):</label>
-        <input type="number" id="price" name="price" value="19.99" required>
+      <label>Description:</label>
+      <textarea id="description" name="description" required></textarea>
 
-        <label for="price">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" value="19.99" required>
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">-- Select Category --</option>
+        <option value="electronics">Electronics</option>
+        <option value="jewellery">Jewellery</option>
+        <option value="fashion">Fashion</option>
+        <option value="home">Home</option>
+      </select>
 
-        <label for="image">image</label>
-        <input type="file">
+      <label>Price ($):</label>
+      <input type="number" id="price" name="price" step="0.01" required>
 
-        <div class="actions">
-            <button type="submit" class="edit-btn">Update Product</button>
-            <button type="button" class="delete-btn" onclick="deleteProduct()">Delete Product</button>
-        </div>
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="1" required>
+
+      <label for="image">Product Image</label>
+      <input type="file" id="image" name="image" accept="image/*">
+
+      <button type="submit">Save Product</button>
     </form>
-</div>
+  </div>
 
-<script>
-    // Example JS function to handle delete
-    function deleteProduct() {
-        if (confirm("Are you sure you want to delete this product?")) {
-            alert("Product deleted (mock action).");
-            // You could redirect or send a DELETE request to the backend here
-        }
+  <script>
+    // const productId = 'your-product-id'; // Replace with dynamic product ID if needed
+    window.onload = function() {
+      // Get the product ID from localStorage or URL (replace with actual method to fetch the product ID)
+      const productId = localStorage.getItem('editProductId') || null;
+
+      if (productId) {
+        // Simulate fetching the product details (replace with actual API call)
+        console.log('Editing product with ID:', productId);
+
+        // Example product data (this would normally come from your API)
+        // const productData = {
+        //   productName: "Smartphone",
+        //   description: "Latest model with high-end specs",
+        //   category: "electronics",
+        //   price: 799.99,
+        //   quantity: 10
+        };
+    
+      
+    
+      
+    
+    // Fetch the product details and populate the form if it's an edit
+    async function fetchProductDetails() {
+      const response = await fetch(`https://inventory-management-f63m.onrender.com/product/updateProduct${productId}`);
+      const product = await response.json();
+
+      document.getElementById('productName').value = product.productName;
+      document.getElementById('description').value = product.description;
+      document.getElementById('category').value = product.category;
+      document.getElementById('price').value = product.price;
+      document.getElementById('quantity').value = product.quantity;
     }
 
-    document.getElementById("productForm").addEventListener("submit", function(e) {
-        e.preventDefault();
-        alert("Product updated (mock action).");
-        // You would send an update (PUT/POST) request to backend here
-    });
-</script>
+    // Call the fetchProductDetails when the page loads
+    window.onload = fetchProductDetails;
 
+    // Form submit handler
+    document.getElementById('productForm').addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Create FormData object for file upload
+      const formData = new FormData();
+      formData.append('productName', document.getElementById('productName').value);
+      formData.append('description', document.getElementById('description').value);
+      formData.append('category', document.getElementById('category').value);
+      formData.append('price', document.getElementById('price').value);
+      formData.append('quantity', document.getElementById('quantity').value);
+
+      const imageInput = document.getElementById('image');
+      if (imageInput.files[0]) {
+        formData.append('image', imageInput.files[0]);
+      }
+
+      try {
+        const response = await fetch(`https://inventory-management-f63m.onrender.com/product/updateProduct/${productId}`, {
+          method: 'PUT',
+          body: formData
+        });
+
+
+        if (response.ok) {
+          alert('Product updated successfully!');
+        } else {
+          alert('Failed to update product.');
+        }
+      } catch (error) {
+        console.error('Error updating product:', error);
+        alert('Error updating product.');
+      }
+   
+  
+    });
+  }
+ 
+  </script>
+</body>
+</html> -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Product</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header {
+      background: #343a40;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+    nav a:hover { text-decoration: underline; }
+    .container { padding: 20px; max-width: 600px; margin: auto; }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="formTitle">Edit Product</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="add_product.html">Add Product</a>
+      <a href="edit_delete_product.html">Manage Products</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <form id="productForm" action="#" method="post" enctype="multipart/form-data">
+      <label>Product Name:</label>
+      <input type="text" id="productName" name="productName" required>
+
+      <label>Description:</label>
+      <textarea id="description" name="description" required></textarea>
+
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">-- Select Category --</option>
+        <option value="electronics">Electronics</option>
+        <option value="jewellery">Jewellery</option>
+        <option value="fashion">Fashion</option>
+        <option value="home">Home</option>
+      </select>
+
+      <label>Price ($):</label>
+      <input type="number" id="price" name="price" step="0.01" required>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="1" required>
+
+      <label for="image">Product Image</label>
+      <input type="file" id="image" name="image" accept="image/*">
+
+      <button type="submit">Save Product</button>
+    </form>
+  </div>
+
+  <script>
+        // const productId = 'your-product-id'; // Replace with dynamic product ID if needed
+        window.onload = function() {
+      // Get the product ID from localStorage or URL (replace with actual method to fetch the product ID)
+      const productId = localStorage.getItem('editProduct') || null;
+
+      if (productId) {
+        // Simulate fetching the product details (replace with actual API call)
+        console.log('Editing product with ID:', productId);
+
+        // Example product data (this would normally come from your API)
+        // const productData = {
+        //   productName: "Smartphone",
+        //   description: "Latest model with high-end specs",
+        //   category: "electronics",
+        //   price: 799.99,
+        //   quantity: 10
+        };
+    // Function to fetch product details when editing
+    async function fetchProductDetails(productId) {
+      try {
+        const response = await fetch(`https://inventory-management-f63m.onrender.com/product/${productId}`);
+        
+        if (!response.ok) {
+          throw new Error('Product not found.');
+        }
+
+        const product = await response.json();
+
+        // Populate the form with the product details
+        document.getElementById('productName').value = product.productName;
+        document.getElementById('description').value = product.description;
+        document.getElementById('category').value = product.category;
+        document.getElementById('price').value = product.price;
+        document.getElementById('quantity').value = product.quantity;
+      } catch (error) {
+        console.error('Error fetching product details:', error);
+        alert('Failed to load product details.');
+      }
+    }
+
+    // Function to update the product
+    async function updateProduct(productId) {
+      const formData = new FormData();
+      formData.append('productName', document.getElementById('productName').value);
+      formData.append('description', document.getElementById('description').value);
+      formData.append('category', document.getElementById('category').value);
+      formData.append('price', document.getElementById('price').value);
+      formData.append('quantity', document.getElementById('quantity').value);
+
+      const imageInput = document.getElementById('image');
+      if (imageInput.files[0]) {
+        formData.append('image', imageInput.files[0]);
+      }
+
+      try {
+        const response = await fetch(`https://inventory-management-f63m.onrender.com/product/updateProduct/${productId}`, {
+          method: 'PUT',
+          body: formData
+        });
+
+        if (response.ok) {
+          alert('Product updated successfully!');
+        } else {
+          alert('Failed to update product.');
+        }
+      } catch (error) {
+        console.error('Error updating product:', error);
+        alert('Error updating product.');
+      }
+    }
+
+    // Function to handle form submission
+    document.getElementById('productForm').addEventListener('submit', (event) => {
+      event.preventDefault();  // Prevent the form from submitting normally
+
+      const productId = localStorage.getItem('editProductId'); // Get the product ID from localStorage
+      if (!productId) {
+        alert('Product ID is missing.');
+        return;
+      }
+
+      updateProduct(productId); // Update the product with the given ID
+    });
+
+    // Fetch the product details when the page loads
+    window.onload = function () {
+      const productId = localStorage.getItem('editProductId');  // Fetch the product ID from localStorage
+      if (productId) {
+        fetchProductDetails(productId);  // Load the product details into the form
+      } else {
+        alert('Product ID is missing.');
+      }
+    };
+  }
+  </script>
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -187,7 +187,7 @@
   </div>
 
   <!-- Sidebar and Main Area -->
-  <div class="dashboard-wrapper">
+  <!-- <div class="dashboard-wrapper">
     <div class="sidebar">
       <h2>My Dashboard</h2>
       <a href="index.html">Dashboard</a>
@@ -233,7 +233,90 @@
   </form>
 
 </div>
-</div>
+</div> --> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Product</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header {
+      background: #343a40;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+    nav a:hover { text-decoration: underline; }
+    .container { padding: 20px; max-width: 600px; margin: auto; }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Add Product</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="admin_login.html">Login</a>
+      <a href="add_product.html">Add Product</a>
+      <a href="edit_delete_product.html">Manage Products</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <form  id="productForm" action="#" method="post" enctype="multipart/form-data">
+      <label>Product Name:</label>
+      <input type="text" id="productName" name="productName" required>
+
+      <label>Description:</label>
+      <textarea id="description" name="description" required></textarea>
+
+      <!-- <label>Category:</label>
+      <select name="category">
+        <option>Electronics</option>
+        <option>Clothing</option>
+        <option>Books</option>
+      </select> -->
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">-- Select Category --</option>
+        <option value="electronics">Electronics</option>
+        <option value="jewellery">jewellery</option>
+        <option value="feshion">Feshion</option>
+        <option value="home">Home</option>
+      </select>
+
+      <label>Price ($):</label>
+      <input type="number" id="price" name="price" step="0.01" required>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="1" required>
+  
+      <label for="image">Product Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required>
+  
+
+      <button type="submit">Add Product</button>
+    </form>
+  </div>
+
+
 <script>
   document.getElementById("productForm").addEventListener("submit", async function (e) {
     e.preventDefault();
